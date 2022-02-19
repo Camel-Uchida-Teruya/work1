@@ -36,7 +36,7 @@ var app = new Vue({
   },
   methods: {
     async registerQuestion() {
-      const preData = await fetch('/question.json');
+      const preData = await fetch('/work1/question.json');
       const data = await preData.json();
       await data.forEach(data_q => {
         this.preQuestions.push(data_q);
@@ -49,7 +49,7 @@ var app = new Vue({
       });
     },
     async registerAnswer() {
-      const preData = await fetch('/answer.json');
+      const preData = await fetch('/work1/answer.json');
       const data = await preData.json();
       await data.forEach(data_a => {
         this.preAnswers.push(data_a);
