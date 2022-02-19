@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>テスト</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/reset.css">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <div class="app" id="app">
+    <h1>
+      <span v-for="item in title">{{ item }}</span>
+    </h1>
+    <div class="app-start">
+      <div class="app-start-target">
+        <p>
+          <span v-for="item in title">{{ item }}</span>
+          <span>あなたの呪われ具合を診断し、<br>あなたの状態やあなたに必要なことを導き出します。</span>
+        </p>
+      </div>
+      <a class="app-start-btn app-start-target" v-on:click="startTrigger()">スタート</a>
+    </div>
+    <p v-bind:class="{ display: !isDisplay }">第{{ stageCount }}問</p>
+    <ul class="app-area" v-bind:class="{ display: !isDisplay }">
+      <li
+        class="app-area-li"
+        v-for="( item, index ) in questions"
+        v-bind:key="item.id"
+        v-on:click="countUp(item)"
+        v-bind:class="{ 'pointer-none': pointerNone }"
+      >
+        <p>{{ item.title }}</p>
+      </li>
+    </ul>
+    <a
+      class="app-button"
+      v-bind:class="{ active: isActive, display: !isDisplay }"
+      v-on:click="countDown()">前の質問へ
+    </a>
+    <div class="app-answer" v-bind:class="{ display: isDisplay }" v-if="answerActive">
+      <ul>
+        <li class="app-answer-li" v-for="item in answers">
+          <h2>{{ item.name }}</h2>
+          <p v-html="item.message"></p>
+        </li>
+      </ul>
+      <a class="app-answer-reset" v-on:click="reset()">もう一度診断</a>
+    </div>
+  </div>
+
+  <script src="/assets/vue.js"></script>
+  <script src="/assets/script.js"></script>
+</body>
+</html>
